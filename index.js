@@ -18,20 +18,31 @@
 // let arrayArg = process.argv[2].split(",")
 
 
+const max = (arrayOfInts) => {
+  let prs = [];
+  console.log('first call\nprs: ', prs);
+  let sAndR = arrayOfInts.sort((a,b) => a-b)
+                         .reverse()
+                         .filter(el => el !== 0);
+  // let len = isEven(sAndR.length) ? sAndR.length : (sAndR.length-1);
+  let len = sAndR.length;
+  console.log('sorted and reversed', sAndR);
+  console.log('len: ',len);
 
-const max = (arrayArg) => {
-  arrayArg.forEach( i => {
-    if (i !== 1 && i !== 0) {
-      //
-    }
 
-
-  });
-
-  // multiplyAndSum(arrayArg)
-  // console.log(arrayArg);
-
-}
+  for (let i=0; i<=len; i++) {
+    console.log('prs: ', prs);
+    // console.log('for loop sAndR ',i,': ' , sAndR[i]);
+    sAndR[i+1] ? prs.push([sAndR[i], sAndR[i+1]]) : null;
+    sAndR[i+1] ? console.log('just pushed: ',[sAndR[i],sAndR[i+1]]) : null;
+    i !== sAndR.length ? i++ : null;
+    console.log('prs: ', prs);
+  }
+  // !isEven(sAndR.length) ? prs.push(sAndR[sAndR.length-1]) : null;
+   console.log('prs: ', prs);
+  return multiplyAndSum(prs);
+  prs = [];
+};
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
@@ -40,9 +51,11 @@ const multiplyAndSum = (arr) => {
                   let ret = (el.length > 1) ? el[0]*el[1] : el[0];
                   return ret;
                 })
-                .reduce(reducer);
+                .reduce(reducer, 0);
   console.log('multiplyAndSum: ', sum);
   return sum;
 }
+
+const isEven = (num) => !(num % 2);
 
 module.exports = {max, reducer, multiplyAndSum}
