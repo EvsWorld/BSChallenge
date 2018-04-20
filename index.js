@@ -19,27 +19,27 @@
 
 
 const max = (arrayOfInts) => {
+  // console.log('\n\nstart\n');
   let prs = [];
-  console.log('first call\nprs: ', prs);
   let sAndR = arrayOfInts.sort((a,b) => a-b)
                          .reverse()
-                         .filter(el => el !== 0);
+                         .filter(el => el > 0);
   // let len = isEven(sAndR.length) ? sAndR.length : (sAndR.length-1);
   let len = sAndR.length;
-  console.log('sorted and reversed', sAndR);
-  console.log('len: ',len);
+  // console.log('sorted and reversed', sAndR);
+  // console.log('len: ',len);
 
 
-  for (let i=0; i<=len; i++) {
-    console.log('prs: ', prs);
+  for (let i=0; i<len; i++) {
+    // console.log('prs: ', prs);
     // console.log('for loop sAndR ',i,': ' , sAndR[i]);
-    sAndR[i+1] ? prs.push([sAndR[i], sAndR[i+1]]) : null;
-    sAndR[i+1] ? console.log('just pushed: ',[sAndR[i],sAndR[i+1]]) : null;
-    i !== sAndR.length ? i++ : null;
-    console.log('prs: ', prs);
+    sAndR[i+1] ? prs.push([sAndR[i], sAndR[i+1]]) : prs.push([sAndR[i]]);
+    // sAndR[i+1] ? console.log('just pushed: ',[sAndR[i],sAndR[i+1]]) : null;
+    i !== len && len !== 2 ? i++ : null;
+    // console.log('prs: ', prs);
   }
   // !isEven(sAndR.length) ? prs.push(sAndR[sAndR.length-1]) : null;
-   console.log('prs: ', prs);
+   // console.log('prs: ', prs);
   return multiplyAndSum(prs);
   prs = [];
 };
@@ -52,7 +52,7 @@ const multiplyAndSum = (arr) => {
                   return ret;
                 })
                 .reduce(reducer, 0);
-  console.log('multiplyAndSum: ', sum);
+  // console.log('multiplyAndSum: ', sum);
   return sum;
 }
 
