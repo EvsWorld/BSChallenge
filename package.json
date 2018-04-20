@@ -1,0 +1,21 @@
+{
+  "name": "BlackwoodChallenge",
+  "version": "1.0.0",
+  "description": "Command line script that given an array of integers, should maximize the result when arbitray pairs are taken, then the two numbers in the pairs multiplied pairwise, then the products are summed.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --watch"
+  },
+  "author": "Evan Hendrix",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^3.5.0",
+    "eslint-plugin-json": "^1.2.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/node": "^7.0.0-beta.44"
+  }
+}
