@@ -11,51 +11,42 @@
 // For the list [-1,0,1] the pairs (-1,0) is formed and 1 is a single element. The maximum sum is 1.
 // For the list [1,1] no pairs are formed, only two single elements. The maximum sum is 2.
 
-// run script in terminal by passing a string of numbers seperated by commas, as follows:
-//
-// node index 0,1,2,3,4,5
-
-// let arrayArg = process.argv[2].split(",")
-
 
 const max = (arrayOfInts) => {
   // console.log('\n\nstart\n');
-  let prs = [];
-  let sAndR = arrayOfInts.sort((a,b) => a-b)
-                         .reverse()
+  let newArray = [];
+  let sorted = arrayOfInts.sort()
                          .filter(el => el > 0);
-  // let len = isEven(sAndR.length) ? sAndR.length : (sAndR.length-1);
-  let len = sAndR.length;
-  // console.log('sorted and reversed', sAndR);
+  let len = sorted.length;
+  // console.log('sorted: ', sorted);
   // console.log('len: ',len);
 
-
-  for (let i=0; i<len; i++) {
-    // console.log('prs: ', prs);
-    // console.log('for loop sAndR ',i,': ' , sAndR[i]);
-    sAndR[i+1] ? prs.push([sAndR[i], sAndR[i+1]]) : prs.push([sAndR[i]]);
-    // sAndR[i+1] ? console.log('just pushed: ',[sAndR[i],sAndR[i+1]]) : null;
-    i !== len && len !== 2 ? i++ : null;
-    // console.log('prs: ', prs);
+  let step;
+  for (let i=len-1; i>=0; i-=step) {
+    let productGreater = (i) => sorted[i]*sorted[i-1] > sorted[i]+sorted[i-1];
+    // console.log('productGreater: ', productGreater(i));
+    // console.log('newArray: ', newArray);
+    // console.log(i,':' , sorted[i]);
+    if (productGreater(i)) {
+      newArray.push(sorted[i]*sorted[i-1]);
+      // console.log('now pushing product of ', sorted[i], ' and ', sorted[i-1]);
+      // console.log('newArray: ', newArray);
+      step = 2;
+    } else {
+      newArray.push(sorted[i])
+      // console.log('now pushing ', sorted[i]);
+      // console.log('newArray: ', newArray);
+      step = 1;
+    }
+    // console.log('(after if block) ',i,':' , sorted[i], '\n\n');
   }
-  // !isEven(sAndR.length) ? prs.push(sAndR[sAndR.length-1]) : null;
-   // console.log('prs: ', prs);
-  return multiplyAndSum(prs);
-  prs = [];
+  // console.log('newArray: ', newArray);
+  return multiplyAndSum(newArray);
+  newArray = [];
 };
 
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-const multiplyAndSum = (arr) => {
-  let sum = arr.map(el => {
-                  let ret = (el.length > 1) ? el[0]*el[1] : el[0];
-                  return ret;
-                })
-                .reduce(reducer, 0);
-  // console.log('multiplyAndSum: ', sum);
-  return sum;
-}
-
-const isEven = (num) => !(num % 2);
+const multiplyAndSum = (arr) => arr.reduce(reducer, 0);
 
 module.exports = {max, reducer, multiplyAndSum}
