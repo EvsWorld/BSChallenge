@@ -3,8 +3,6 @@
  require('chai').should();
 
 const max = require('../index.js').max;
-const multiplyAndSum = require('../index.js').multiplyAndSum;
-
 
  describe('max', function () {
    it('should maximize the result when arbitray pairs are taken, then the two numbers in the pairs multiplied pairwise, then the products are summed.', function () {
