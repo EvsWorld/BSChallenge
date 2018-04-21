@@ -13,34 +13,20 @@
 
 
 const max = (arrayOfInts) => {
-  // console.log('\n\nstart\n');
   let newArray = [];
-  let sorted = arrayOfInts.sort()
-                         .filter(el => el > 0);
+  let sorted = arrayOfInts.sort().filter(el => el > 0);
   let len = sorted.length;
-  // console.log('sorted: ', sorted);
-  // console.log('len: ',len);
-
   let step;
   for (let i=len-1; i>=0; i-=step) {
     let productGreater = (i) => sorted[i]*sorted[i-1] > sorted[i]+sorted[i-1];
-    // console.log('productGreater: ', productGreater(i));
-    // console.log('newArray: ', newArray);
-    // console.log(i,':' , sorted[i]);
     if (productGreater(i)) {
       newArray.push(sorted[i]*sorted[i-1]);
-      // console.log('now pushing product of ', sorted[i], ' and ', sorted[i-1]);
-      // console.log('newArray: ', newArray);
       step = 2;
     } else {
-      newArray.push(sorted[i])
-      // console.log('now pushing ', sorted[i]);
-      // console.log('newArray: ', newArray);
+      newArray.push(sorted[i]);
       step = 1;
     }
-    // console.log('(after if block) ',i,':' , sorted[i], '\n\n');
   }
-  // console.log('newArray: ', newArray);
   return multiplyAndSum(newArray);
   newArray = [];
 };
@@ -49,4 +35,4 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 const multiplyAndSum = (arr) => arr.reduce(reducer, 0);
 
-module.exports = {max, reducer, multiplyAndSum}
+module.exports = {max, reducer, multiplyAndSum};
